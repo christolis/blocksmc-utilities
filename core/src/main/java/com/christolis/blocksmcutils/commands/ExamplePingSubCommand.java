@@ -1,4 +1,4 @@
-package org.example.core.commands;
+package com.christolis.blocksmcutils.commands;
 
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;

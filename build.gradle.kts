@@ -2,18 +2,23 @@ plugins {
     id("java-library")
     id("net.labymod.gradle")
     id("net.labymod.gradle.addon")
+    id("com.diffplug.spotless") version "6.0.0"
 }
 
-group = "org.example"
+repositories {
+    mavenCentral()
+}
+
+group = "com.christolis"
 version = System.getenv().getOrDefault("VERSION", "1.0.0")
 
 labyMod {
-    defaultPackageName = "org.example" //change this to your main package name (used by all modules)
+    defaultPackageName = "com.christolis"
     addonInfo {
-        namespace = "example"
-        displayName = "ExampleAddon"
-        author = "Example Author"
-        description = "Example Description"
+        namespace = "christolis"
+        displayName = "BlocksMC Utilities"
+        author = "Christolis"
+        description = "LabyMod add-on which adds extra functionalities while playing on the BlocksMC server."
         minecraftVersion = "*"
         version = getVersion().toString()
     }
@@ -54,11 +59,27 @@ subprojects {
     plugins.apply("java-library")
     plugins.apply("net.labymod.gradle")
     plugins.apply("net.labymod.gradle.addon")
+    plugins.apply("com.diffplug.spotless")
 
     repositories {
+        mavenCentral()
         maven("https://libraries.minecraft.net/")
         maven("https://repo.spongepowered.org/repository/maven-public/")
     }
+
+    // All subprojects inherit root project group and version, to avoid duplication.
+    group = rootProject.group
+    version = rootProject.version
+
+    spotless {
+        java {
+            targetExclude("build/**")
+            endWithNewline()
+            removeUnusedImports()
+            eclipse().configFile("${rootProject.rootDir}/google-style-eclipse.xml")
+        }
+    }
+
 }
 
 fun configureRun(provider: net.labymod.gradle.core.minecraft.provider.VersionProvider, gameVersion: String) {

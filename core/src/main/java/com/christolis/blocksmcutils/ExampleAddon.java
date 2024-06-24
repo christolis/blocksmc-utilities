@@ -1,9 +1,9 @@
-package org.example.core;
+package com.christolis.blocksmcutils;
 
+import com.christolis.blocksmcutils.commands.ExamplePingCommand;
+import com.christolis.blocksmcutils.listener.ExampleGameTickListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.models.addon.annotation.AddonMain;
-import org.example.core.commands.ExamplePingCommand;
-import org.example.core.listener.ExampleGameTickListener;
 
 @AddonMain
 public class ExampleAddon extends LabyAddon<ExampleConfiguration> {
